@@ -49,6 +49,7 @@ public class DictionaryManagement  {
     }
 
     /**.
+     Dùng cho CommandLine
      *VD: home -> nha
      */
     public static void dictionaryLookup() {
@@ -61,6 +62,8 @@ public class DictionaryManagement  {
 
 
     /**.
+    Dùng cho Commandline
+    indexOf trả về index xuất hiện đầu tiền của chuỗi
      *VD : tra -> transaction , transalate ,...
      */
     public static void dictionarySearcher() {
@@ -90,6 +93,11 @@ public class DictionaryManagement  {
         return "not found";
     }
 
+    /*
+    Method Lookup 
+        index = vị trí của từ muốn tìm
+        Nếu index >= 0 thì trả về giá trị trong index đó
+    */
 
     public static String Lookup(String findWord) {
         int index = Collections.binarySearch(dictionary.wordList, new Word(findWord), new Comparator<Word>() {
@@ -106,6 +114,13 @@ public class DictionaryManagement  {
         //return dictionary.wordList.get(index).getWord_explain();
     }
 
+    /**.
+    Dùng để sửa từ 
+        Xác định index của từ cần sửa
+        sửa từ khi đã xác định được index
+        sắp xếp lại List
+        sửa vào file
+    */
     public static void fixWord(Word word, Word fix) {
         try {
             int index = Collections.binarySearch(dictionary.wordList, word, new Comparator<Word>() {
@@ -128,6 +143,9 @@ public class DictionaryManagement  {
 
     }
 
+    /**
+    Logic giống trên
+    */
     public static void delWord(Word word) {
         try {
             int index = Collections.binarySearch(dictionary.wordList, word, new Comparator<Word>() {
@@ -175,6 +193,9 @@ public class DictionaryManagement  {
         return dictionary.wordList;
     }
 
+    /**
+    In File
+    */ 
     public static void outFile() {
         try {
             FileWriter fileWriter = new FileWriter(dictionary.FILE_INPUT);
