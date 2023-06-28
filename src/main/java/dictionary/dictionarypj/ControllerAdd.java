@@ -46,10 +46,10 @@ public class ControllerAdd implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tcEng.setCellValueFactory(new PropertyValueFactory<Word, String>("word_target"));
+        tcEng.setCellValueFactory(new PropertyValueFactory<Word, String>("word_target"));  // Đặt data sourse cho 2 cột tcEng và TcVn
         tcVn.setCellValueFactory(new PropertyValueFactory<Word, String>("word_explain"));
 
-        wordslist = FXCollections.observableArrayList();
+        wordslist = FXCollections.observableArrayList(); // mothed cho phép theo dõi những thay đổi
         for (Word word :DictionaryManagement.dictionary.wordList) {
             wordslist.add(word);
         }
@@ -62,7 +62,13 @@ public class ControllerAdd implements Initializable{
         });
     }
 
+    /**
+    Mehthod thêm từ mới khi có ButtonAdd
+    */
     public void buttonAdd(ActionEvent actionEvent) {
+        /*
+        Nếu ở textfieldEng hoặc TfVn Null mà ấn Button thì sẽ hiện thông báo 
+        */
         if (tfEng.getText().equals(null) || tfVn.getText().equals(null)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("không có thay doi");
@@ -71,6 +77,9 @@ public class ControllerAdd implements Initializable{
         tcEng.setCellValueFactory(new PropertyValueFactory<Word, String>("word_target"));
         tcVn.setCellValueFactory(new PropertyValueFactory<Word, String>("word_explain"));
         Word word = new Word(tfEng.getText(), tfVn.getText());
+            /*
+            Kiếm tra nếu đã có từ đó trong List thì ko thêm nữa
+            */
         if (DictionaryManagement.check(word)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Đã trùng !");
